@@ -1,0 +1,19 @@
+.match-item {
+  width: 80vw;
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.match-item:hover {
+  cursor: pointer;
+  outline: 3px solid #A94A53;
+}
+
+.match-item__details {
+  text-align: left;
+}
+
+.match-item__dates {
+  text-align: right;
+}

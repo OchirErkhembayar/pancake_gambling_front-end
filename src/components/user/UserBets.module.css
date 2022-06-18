@@ -1,0 +1,43 @@
+.bet {
+  color: black;
+  background-color: white !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bet-list {
+  list-style: none;
+  padding: 0 1rem;
+}
+
+li:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.modal {
+  border: 2px solid white;
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 0;
+}
+
+.default {
+  text-align: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: left;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.filters h3 {
+  cursor: pointer;
+}
+
+.active {
+  text-decoration: underline;
+}

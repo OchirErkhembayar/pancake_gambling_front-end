@@ -1,0 +1,101 @@
+import React, { useRef, useContext } from 'react'
+
+import styles from "./MatchModal.module.css";
+import useHttp from '../../hooks/use-http';
+import useInput from '../../hooks/use-input';
+import Modal from '../UI/Modal';
+import Button from '../UI/Button';
+import UserContext from '../user/user-context';
+
+const MatchModal = (props) => {
+  const userCtx = useContext(UserContext);
+  const enteredAthlete = useRef();
+  const { sendRequest: createBet } = useHttp();
+
+  const {
+    value: enteredAmount,
+    isValid: enteredAmountIsValid,
+    // hasError: amountInputHasError,
+    valueChangeHandler: amountChangedHandler,
+    inputBlurHandler: amountBlurHandler,
+    reset: resetAmountInput,
+  } = useInput((value) => {
+    return value > 0 && value <= userCtx.user.balance
+  });
+
+  let formIsValid = false;
+
+  if (enteredAmountIsValid) {
+    formIsValid = true;
+  }
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!enteredAmountIsValid) {
+      return;
+    }
+    const transformUser = (betObj) => {
+      console.log(betObj);
+      userCtx.onRemovePancakes(betObj.bet.amount);
+      userCtx.onAddBet(betObj.bet)
+    };
+
+    createBet(
+      {
+        url: `http://localhost:8000/bet/create-bet/${userCtx.user.id}/${enteredAthlete.current.value}`,
+        body: {
+          amount: enteredAmount
+        },
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      },
+      transformUser
+    )
+    resetAmountInput();
+    props.onClick();
+  }
+
+  return (
+    <Modal className={styles.modal} onClick={props.onClick}>
+      <h1>{props.match.title}</h1>
+      <h3>{props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} ({props.athleteTwoOdds})</h3>
+      <h2>Create a bet</h2>
+      <form className={styles.form}>
+        <div className={styles.form__input}>
+          <div className={styles.form__control}>
+            <label htmlFor="athlete">Athlete: </label>
+            <select
+              name="athlete"
+              id="athlete"
+              defaultValue={props.athleteOneMAId}
+              ref={enteredAthlete}
+            >
+              <option value={props.athleteOneMAId}>{props.athleteOne}</option>
+              <option value={props.athleteTwoMAId}>{props.athleteTwo}</option>
+            </select>
+          </div>
+          <div className={styles.form__control}>
+            <label htmlFor="amount">Amount: </label>
+            <input
+              name="amount"
+              id="amount"
+              type="number"
+              placeholder='Enter amount here'
+              step={50}
+              onChange={amountChangedHandler}
+              onBlur={amountBlurHandler}
+              value={enteredAmount}
+            />
+          </div>
+        </div>
+        <div className={styles.form__actions}>
+          <Button className={styles.button} onClick={onSubmitHandler} type="submit" disabled={!formIsValid}>Make Bet</Button>
+        </div>
+      </form>
+    </Modal>
+  )
+}
+
+export default MatchModal

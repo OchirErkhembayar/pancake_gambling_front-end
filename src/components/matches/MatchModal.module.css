@@ -1,0 +1,58 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 0.1rem solid white;
+}
+
+.modal h1, h2 {
+  text-decoration: underline;
+}
+
+.modal p {
+  font-size: 1rem;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form__input {
+  gap: 1rem;
+  display: flex;
+}
+
+.form__input input {
+  padding: 5px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.form__input input:focus {
+  padding: 5px;
+  outline: 1px solid #3D3561;
+}
+
+.form__input select {
+  padding: 4px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.form__input select:focus {
+  padding: 4px;
+  outline: 1px solid #3D3561;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.button {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: none;
+}
+
+.button:hover {
+  text-decoration: underline;
+}

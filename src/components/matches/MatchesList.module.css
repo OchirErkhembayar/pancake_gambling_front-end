@@ -1,0 +1,36 @@
+.match-list {
+  margin: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+.match-list h1 {
+  text-decoration: underline;
+  margin-top: 0;
+}
+
+/* @media (max-width: 1800px) {
+  .match-list {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media (max-width: 1475px) {
+  .match-list {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media (max-width: 1150px) {
+  .match-list {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 780px) {
+  .match-list {
+    grid-template-columns: auto;
+  }
+} */
