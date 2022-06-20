@@ -8,6 +8,8 @@
 .bet-list {
   list-style: none;
   padding: 0 1rem;
+  max-height: 50vh;
+  overflow: auto;
 }
 
 li:not(:last-child) {

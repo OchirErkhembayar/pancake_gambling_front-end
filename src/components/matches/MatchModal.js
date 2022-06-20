@@ -48,13 +48,24 @@ const MatchModal = (props) => {
         },
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + userCtx.token
         }
       },
       transformUser
     )
     resetAmountInput();
     props.onClick();
+  }
+
+  if (!userCtx.loggedIn) {
+    return (
+      <Modal className={styles.modal} onClick={props.onClick}>
+      <h1>{props.match.title}</h1>
+      <h3>{props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} ({props.athleteTwoOdds})</h3>
+      <h3>Login to create a bet</h3>
+    </Modal>
+    )
   }
 
   return (
@@ -64,7 +75,7 @@ const MatchModal = (props) => {
       <h2>Create a bet</h2>
       <form className={styles.form}>
         <div className={styles.form__input}>
-          <div className={styles.form__control}>
+          <div>
             <label htmlFor="athlete">Athlete: </label>
             <select
               name="athlete"
@@ -76,7 +87,7 @@ const MatchModal = (props) => {
               <option value={props.athleteTwoMAId}>{props.athleteTwo}</option>
             </select>
           </div>
-          <div className={styles.form__control}>
+          <div>
             <label htmlFor="amount">Amount: </label>
             <input
               name="amount"

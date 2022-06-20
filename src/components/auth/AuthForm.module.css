@@ -1,0 +1,73 @@
+.card {
+  background-color: #B64251;
+  width: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+  padding: 1rem;
+  border: 1px solid white;
+  flex-direction: column;
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.1rem;
+  width: 20rem;
+  margin: 1rem;
+}
+
+.form-control label {
+  margin: 0.4rem;
+}
+
+.form-control input {
+  padding: 6px;
+  background-color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  border: 1px solid white;
+}
+
+.form-control input:focus {
+  outline: 1px solid blue;
+}
+
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.button {
+  width: 20rem;
+  height: 2.5rem;
+  margin: 0 1rem;
+  margin-bottom: 1rem;
+  background-color: #3F3564;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel {
+  margin: 0;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  text-decoration: underline;
+}

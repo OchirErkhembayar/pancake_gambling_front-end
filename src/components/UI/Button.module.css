@@ -5,6 +5,7 @@
   padding: 0.8rem;
   font-size: 1rem;
   cursor: pointer;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .button:hover {

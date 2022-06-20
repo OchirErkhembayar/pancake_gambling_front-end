@@ -27,7 +27,7 @@ const UserBets = (props) => {
     list = <ul className={styles['bet-list']}>
             {bets.map(bet => {
               return (
-                <li><Card className={styles.bet} key={bet.id}>
+                <li key={bet.id}><Card className={styles.bet}>
                   <p>Athlete: {bet.matchAthlete.athlete.firstName} {bet.matchAthlete.athlete.lastName}</p>
                   <p>Amount: {bet.amount} pancakes</p>
                   <p>Result: {bet.result !== null ? bet.result ? "Won" : "Lost" : "TBD"}</p>

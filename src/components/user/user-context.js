@@ -4,13 +4,36 @@ import useHttp from '../../hooks/use-http';
 
 const UserContext = React.createContext({
   user: {},
+  login: (token) => {},
+  logout: () => {},
+  token: '',
+  loggedIn: false,
   onAddPancakes: (amount) => {},
   onRemovePancakes: (amount) => {},
   onAddBet: () => {}
 });
 
 export const UserContextProvider = (props) => {
-  const [user, setUser] = useState({});
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [user, setUser] = useState({id: localStorage.getItem('userId')} || {});
+
+  let userLoggedIn = !!token;
+
+  const loginHandler = (userObj) => {
+    setUser({
+      id: userObj.userId
+    });
+    setToken(userObj.token);
+    localStorage.setItem('token', userObj.token);
+    localStorage.setItem('userId', userObj.userId);
+  }
+
+  const logoutHandler = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    setUser({});
+    setToken(null);
+  }
 
   const { sendRequest: fetchUser } = useHttp();
 
@@ -18,14 +41,19 @@ export const UserContextProvider = (props) => {
     const transformUser = (userObj) => {
       setUser(userObj.user);
     };
-
-    fetchUser(
-      {
-        url: `http://localhost:8000/auth/get-user/2`
-      },
-      transformUser
-    );
-  }, [fetchUser])
+    if (userLoggedIn && !user.username) {
+      fetchUser(
+        {
+          url: `http://localhost:8000/auth/get-user/${user.id}`,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token
+          }
+        },
+        transformUser
+      );
+    }
+  }, [fetchUser, userLoggedIn, user, token])
 
   const addBetHandler = (bet) => {
     setUser(prevState => {
@@ -59,6 +87,10 @@ export const UserContextProvider = (props) => {
     <UserContext.Provider
       value={{
         user: user,
+        token: token,
+        login: loginHandler,
+        logout: logoutHandler,
+        loggedIn: !!user.username,
         onAddPancakes: addPancakesHandler,
         onRemovePancakes: removePancakesHandler,
         onAddBet: addBetHandler
