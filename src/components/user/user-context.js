@@ -42,12 +42,11 @@ export const UserContextProvider = (props) => {
   useEffect(() => {
     const transformUser = (userObj) => {
       setUser(userObj.user);
+    };
+    if (userLoggedIn && !user.username) {
       if (new Date().getTime() > localStorage.getItem('expiry')) {
         return logoutHandler();
       }
-    };
-    if (userLoggedIn && !user.username) {
-      console.log(`${process.env.REACT_APP_URL}`);
       fetchUser(
         {
           url: `${process.env.REACT_APP_URL}/auth/get-user/${user.id}`,
