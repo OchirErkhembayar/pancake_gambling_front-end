@@ -56,10 +56,10 @@ const MatchItem = (props) => {
           <h3>{props.match.title}</h3>
         </div>
         <div className={styles['match-item__dates']}>
-          <h3>{props.match.city}, {props.match.country}</h3>
-          <h3>{date}</h3>
-          <h4>Weightlimit: {weightLimit}</h4>
-          <h4>Odds: {athleteOne.firstName}({athleteOneOdds}) - {athleteTwo.firstName}({athleteTwoOdds})</h4>
+          <h3 className={styles.mobile}>{props.match.city}, {props.match.country}</h3>
+          <h3 className={styles.mobile}>{date}</h3>
+          <h4 className={styles.mobile}>Weightlimit: {weightLimit}</h4>
+          <h4 className={styles.mobile2}>Odds: {athleteOne.firstName}({athleteOneOdds}) - {athleteTwo.firstName}({athleteTwoOdds})</h4>
         </div>
       </Card>
     </React.Fragment>

@@ -17,3 +17,15 @@
 .match-item__dates {
   text-align: right;
 }
+
+@media (max-width: 600px) {
+  .mobile  {
+    display: none;
+  }
+}
+
+@media (max-width: 880px) {
+  .mobile2 {
+    display: none;
+  }
+}
