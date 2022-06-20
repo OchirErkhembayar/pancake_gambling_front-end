@@ -52,7 +52,7 @@ const AuthForm = (props) => {
       {
         url: `${process.env.REACT_APP_URL}/auth/login`,
         body: {
-          username: usernameValue,
+          username: usernameValue.toLowerCase(),
           password: passwordValue
         },
         method: 'POST',

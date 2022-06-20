@@ -26,11 +26,13 @@ export const UserContextProvider = (props) => {
     setToken(userObj.token);
     localStorage.setItem('token', userObj.token);
     localStorage.setItem('userId', userObj.userId);
+    localStorage.setItem('expiry', new Date().getTime() + 3600000)
   }
 
   const logoutHandler = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('expiry');
     setUser({});
     setToken(null);
   }
@@ -40,6 +42,9 @@ export const UserContextProvider = (props) => {
   useEffect(() => {
     const transformUser = (userObj) => {
       setUser(userObj.user);
+      if (new Date().getTime() > localStorage.getItem('expiry')) {
+        return logoutHandler();
+      }
     };
     if (userLoggedIn && !user.username) {
       console.log(`${process.env.REACT_APP_URL}`);
