@@ -50,7 +50,7 @@ const AuthForm = (props) => {
 
     fetchLogin(
       {
-        url: 'http://localhost:8000/auth/login',
+        url: 'http://pancake-gambling-backend.herokuapp/auth/login',
         body: {
           username: usernameValue,
           password: passwordValue

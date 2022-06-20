@@ -44,7 +44,7 @@ export const UserContextProvider = (props) => {
     if (userLoggedIn && !user.username) {
       fetchUser(
         {
-          url: `http://localhost:8000/auth/get-user/${user.id}`,
+          url: `http://pancake-gambling-backend.herokuapp/auth/get-user/${user.id}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + token
