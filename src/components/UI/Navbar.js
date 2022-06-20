@@ -26,7 +26,7 @@ const Navbar = (props) => {
     <React.Fragment>
       {showModal && <UserBets bets={props.user.bets} onClick={hideModalHandler} />}
       <nav className={styles.navbar}>
-        <h1 onClick={props.showBannerHandler} className={styles.mobile}>Pancake Gambling</h1>
+        <h1 onClick={props.showBanner} className={`${styles.mobile} ${styles.logoButton}`}>Pancake Gambling</h1>
         {userCtx.loggedIn && <div className={styles.navigation}>
           <h3 className={styles.mobile}>Hello, {userCtx.user.username}</h3>
           <p>Balance: {userCtx.user.balance.toFixed(0)} pancakes</p>

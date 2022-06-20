@@ -30,6 +30,10 @@
   text-decoration: underline;
 }
 
+.logoButton:hover {
+  cursor: pointer !important;
+}
+
 @media (max-width: 600px) {
   .mobile  {
     display: none;
