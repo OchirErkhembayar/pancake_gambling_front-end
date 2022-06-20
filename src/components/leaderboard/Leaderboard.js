@@ -16,7 +16,7 @@ const Leaderboard = () => {
     };
 
     fetchUsers(
-      { url: 'https://pancake-gambling-backend.herokuapp.com/auth/top'},
+      { url: `${process.env.REACT_APP_URL}/auth/top`},
       transformUsers
     )
   }, [fetchUsers])

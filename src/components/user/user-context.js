@@ -42,9 +42,10 @@ export const UserContextProvider = (props) => {
       setUser(userObj.user);
     };
     if (userLoggedIn && !user.username) {
+      console.log(`${process.env.REACT_APP_URL}`);
       fetchUser(
         {
-          url: `https://pancake-gambling-backend.herokuapp.com/auth/get-user/${user.id}`,
+          url: `${process.env.REACT_APP_URL}/auth/get-user/${user.id}`,
           headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + token
