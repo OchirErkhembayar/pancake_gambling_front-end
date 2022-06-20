@@ -17,7 +17,7 @@ const Matches = () => {
     };
 
     fetchMatches(
-      { url: 'http://pancake-gambling-backend.herokuapp/match/upcoming-matches'},
+      { url: 'https://pancake-gambling-backend.herokuapp/match/upcoming-matches'},
       transformMatches
     )
   }, [fetchMatches])
