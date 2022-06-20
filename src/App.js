@@ -19,6 +19,10 @@ function App() {
     setBanner(false);
   }
 
+  const showBannerHandler = () => {
+    setBanner(true);
+  }
+
   const onLoginPage = () => {
     setLoginPage(true);
   }
@@ -29,7 +33,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <Navbar user={userCtx.user} loginPage={loginPage} hideLoginPage={hideLoginPage} showLoginPage={onLoginPage} />
+      <Navbar user={userCtx.user} loginPage={loginPage} showBanner={showBannerHandler} hideLoginPage={hideLoginPage} showLoginPage={onLoginPage} />
       {!banner && !loginPage && <Matches />}
       {banner && !loginPage && <Banner onNoBanner={noBannerHandler}/>}
       {!userCtx.loggedIn && loginPage && <Auth hideLoginPage={hideLoginPage} />}
