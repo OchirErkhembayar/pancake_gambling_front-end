@@ -42,7 +42,7 @@ const MatchModal = (props) => {
 
     createBet(
       {
-        url: `https://pancake-gambling-backend.herokuapp/bet/create-bet/${userCtx.user.id}/${enteredAthlete.current.value}`,
+        url: `https://pancake-gambling-backend.herokuapp.com/bet/create-bet/${userCtx.user.id}/${enteredAthlete.current.value}`,
         body: {
           amount: enteredAmount
         },
