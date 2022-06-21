@@ -70,6 +70,14 @@ const AuthForm = (props) => {
   const usernameClasses = usernameHasError || error ? styles['form-control'] + ' invalid' : styles['form-control'];
   const passwordClasses = passwordHasError || error ? styles['form-control'] + ' invalid' : styles['form-control'];
 
+  if (isLoading) {
+    return (
+      <Card className={styles.card}>
+        <p>Loading...</p>
+      </Card>
+    )
+  }
+
   return (
     <Card className={styles.card}>
       <form onSubmit={submitHandler}>

@@ -10,7 +10,8 @@ const UserContext = React.createContext({
   loggedIn: false,
   onAddPancakes: (amount) => {},
   onRemovePancakes: (amount) => {},
-  onAddBet: () => {}
+  onAddBet: () => {},
+  isLoading: false
 });
 
 export const UserContextProvider = (props) => {
@@ -37,7 +38,7 @@ export const UserContextProvider = (props) => {
     setToken(null);
   }
 
-  const { sendRequest: fetchUser } = useHttp();
+  const { isLoading, sendRequest: fetchUser } = useHttp();
 
   useEffect(() => {
     const transformUser = (userObj) => {
@@ -93,6 +94,7 @@ export const UserContextProvider = (props) => {
       value={{
         user: user,
         token: token,
+        isLoading: isLoading,
         login: loginHandler,
         logout: logoutHandler,
         loggedIn: !!user.username,

@@ -22,6 +22,17 @@ const Navbar = (props) => {
     userCtx.logout();
   }
 
+  if (userCtx.isLoading) {
+    return (
+      <React.Fragment>
+        <nav className={styles.navbar}>
+          <h1 onClick={props.showBanner} className={`${styles.mobile} ${styles.logoButton}`}>Pancake Gambling</h1>
+          <p>Loading...</p>
+        </nav>
+      </React.Fragment>
+    )
+  }
+
   return (
     <React.Fragment>
       {showModal && <UserBets bets={props.user.bets} onClick={hideModalHandler} />}
