@@ -45,7 +45,6 @@ const AthleteModal = (props) => {
   if (matches.length > 0) {
     let upcomingMatch = matches.filter((match) => match.result === null);
     if (upcomingMatch.length > 0) {
-      console.log(upcomingMatch);
       upcomingMatch.sort((a, b) => {
         return +a.match.date.substring(0, 10).split("-").join("") - +b.match.date.substring(0, 10).split("-").join("")
       })
@@ -70,6 +69,9 @@ const AthleteModal = (props) => {
     }
     const prevMatches = matches.filter((match) => match.result !== null);
     if (prevMatches.length > 0) {
+      prevMatches.sort((a, b) => {
+        return +b.match.date.substring(0, 10).split("-").join("") - +a.match.date.substring(0, 10).split("-").join("")
+      })
       previousMatches = (
         <React.Fragment>
           <h3 className={styles.underline}>Match History</h3>

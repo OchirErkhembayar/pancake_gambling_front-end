@@ -35,9 +35,24 @@
 .card {
   padding: 1px;
   border: 1px solid white;
+  margin-bottom: 5px;
 }
 
 .matches {
   max-height: 300px;
-  overflow: scroll;
+  overflow: auto;
+  padding: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #B64251;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 1px;
 }
