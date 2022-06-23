@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import useInput from "../../hooks/use-input";
 import Card from "../UI/Card";
@@ -43,7 +43,7 @@ const AuthForm = (props) => {
     event.preventDefault();
     const transformUser = (userObj) => {
       userCtx.login(userObj);
-      history.push("/");
+      history.goBack();
     };
 
     if (!formIsValid) {
@@ -112,7 +112,7 @@ const AuthForm = (props) => {
           {isLoading && <Button className={styles.button} disabled={true}>Logging in...</Button>}
         </div>
       </form>
-      <Link to="/"><Button className={styles.cancel} onClick={props.hideLoginPage}>Cancel</Button></Link>
+      <Button className={styles.cancel} onClick={() => {history.goBack()}}>Cancel</Button>
     </Card>
   );
 };
