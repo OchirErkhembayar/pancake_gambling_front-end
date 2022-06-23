@@ -28,17 +28,19 @@ const AthleteModal = (props) => {
     );
   }, [fetchAthlete, props.athlete.id]);
 
-  let previousMatches = <p>This athlete has no previous matches.</p>;
+  let previousMatches = <p>Loading match history...</p>;
+  let nextMatch = <p>Loading next match data...</p>;
 
-  if (isLoading) {
-    previousMatches = <p>Loading match history...</p>;
+  if (!isLoading) {
+    previousMatches = <p>This athlete has no previous matches.</p>;
+    nextMatch = <p>Next match not finalsed yet.</p>
   }
 
   if (error) {
+    nextMatch = <p>Failed to get next match data</p>
     previousMatches = <p>Failed to get match history</p>;
   }
 
-  let nextMatch = <p>Next match not finalsed yet.</p>
 
   if (matches.length > 0) {
     let upcomingMatch = matches.filter((match) => match.result === null);
