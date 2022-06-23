@@ -12,7 +12,6 @@ const Athletes = () => {
 
   useEffect(() => {
     const transformAthletes = (athleteObj) => {
-      console.log(athleteObj.athletes);
       setAthletes(athleteObj.athletes);
     };
 

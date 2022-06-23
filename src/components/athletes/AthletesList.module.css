@@ -15,6 +15,11 @@
 }
 
 .athlete-list {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  flex-wrap: wrap;
   gap: 2rem;
+  width: 90vw;
+  margin: 1rem 0;
 }

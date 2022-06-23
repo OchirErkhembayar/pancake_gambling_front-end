@@ -7,8 +7,6 @@ import styles from "./AthletesList.module.css";
 const AthletesList = (props) => {
   let athleteList = <h3 className={styles.athletes}>No athletes found.</h3>;
 
-  console.log(props)
-
   if (props.athletes.length > 0) {
     athleteList = (
       <div className={styles.athletes}>

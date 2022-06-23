@@ -1,0 +1,7 @@
+.athlete-item {
+  cursor: pointer;
+}
+
+.athlete-item:hover {
+  outline: 3px solid #A94A53;
+}

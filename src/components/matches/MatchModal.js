@@ -109,6 +109,7 @@ const MatchModal = (props) => {
           {isLoading && <Button className={styles.button} type="submit" disabled={true}>Making bet...</Button>}
         </div>
       </form>
+      <Button className={styles.button} onClick={props.onClick}>Close</Button>
     </Modal>
   )
 }
