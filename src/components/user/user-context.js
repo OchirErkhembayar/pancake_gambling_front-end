@@ -65,7 +65,7 @@ export const UserContextProvider = (props) => {
     setUser(prevState => {
       return {
         ...prevState,
-        bets: prevState.bets.unshift(bet)
+        bets: prevState.bets.concat(bet)
       }
     })
   }

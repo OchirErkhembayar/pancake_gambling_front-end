@@ -26,7 +26,7 @@ const MatchItem = (props) => {
   if (props.match.weightLimit) {
     weightLimit = props.match.weightLimit + "kg";
   }
-
+  console.log(props.match);
   const athleteOne = props.match.athletes[0];
   const athleteOneOdds = athleteOne.matchAthlete.odds;
   const athleteOneMAId = athleteOne.matchAthlete.id;

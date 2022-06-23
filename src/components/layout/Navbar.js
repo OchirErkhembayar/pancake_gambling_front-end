@@ -48,7 +48,7 @@ const Navbar = (props) => {
         <p className={`${styles.mobile} ${styles.balance}`}>Balance: {userCtx.user.balance.toFixed(0)} pancakes</p>
         <p className={styles.bets} onClick={showModalHandler}>
           Bets
-          {userCtx.user.bets.length > 0
+          {userCtx.user.bets.filter(bet => bet.result === null).length > 0
             ? `(${
                 userCtx.user.bets.filter((bet) => bet.result === null).length
               })`
