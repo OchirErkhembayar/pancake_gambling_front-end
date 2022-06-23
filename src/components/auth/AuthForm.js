@@ -30,11 +30,13 @@ const AuthForm = () => {
     isLoading: loginLoading,
     error: loginError,
     sendRequest: fetchLogin,
+    removeError: removeLoginError
   } = useHttp();
   const {
     isLoading: signupLoading,
     error: signupError,
     sendRequest: fetchSignup,
+    removeError: removeSignupError
   } = useHttp();
 
   const loginHandler = (event) => {
@@ -245,6 +247,13 @@ const AuthForm = () => {
         <Button
           className={styles.switch}
           onClick={() => {
+            setFormValidity({
+              username: true,
+              password: true,
+              confirmPassword: true,
+              email: true,
+            })
+            removeLoginError();
             setSignup(true);
           }}
         >
@@ -255,6 +264,13 @@ const AuthForm = () => {
         <Button
           className={styles.switch}
           onClick={() => {
+            setFormValidity({
+              username: true,
+              password: true,
+              confirmPassword: true,
+              email: true,
+            })
+            removeSignupError();
             setSignup(false);
           }}
         >

@@ -34,10 +34,15 @@ const useHttp = () => {
     setIsLoading(false);
   }, []);
 
+  const removeError = () => {
+    setError(false);
+  }
+
   return {
     isLoading,
     error,
     sendRequest,
+    removeError
   };
 };
 
