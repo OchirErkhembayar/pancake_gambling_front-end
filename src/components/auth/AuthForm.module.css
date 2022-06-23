@@ -34,16 +34,6 @@
   outline: 1px solid blue;
 }
 
-.invalid input {
-  border: 1px solid #b40e0e;
-  background-color: #fddddd;
-}
-
-.invalid input:focus {
-  border-color: #ff8800;
-  background-color: #fbe8d2;
-}
-
 .button {
   width: 20rem;
   height: 2.5rem;
@@ -67,6 +57,23 @@
   margin: 0;
   cursor: pointer;
   padding: 0;
+}
+
+.switch {
+  margin: 0;
+}
+
+.error {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.empty-fields {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 .cancel:hover {

@@ -4,11 +4,12 @@ import AuthForm from './AuthForm';
 import styles from "./Auth.module.css";
 
 const Auth = (props) => {
+
   return (
     <div className={styles.auth}>
-      <AuthForm hideLoginPage={props.hideLoginPage} />
+      <AuthForm />
     </div>
   )
 }
 
-export default Auth
+export default Auth;

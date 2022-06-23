@@ -14,17 +14,22 @@ const useHttp = () => {
         body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message);
+        console.log(data, "DATA");
+        let message = "Something went wrong!"
+        if (data.message) {
+          message = data.message
+        }
+        throw new Error(message);
       }
 
-      const data = await response.json();
       setError(null);
       applyData(data);
-    } catch (err) {
-      setError(err.message || 'Something went wrong!');
-      alert(err.message);
+    } catch (error) {
+      console.log(error.message, "ERROR")
+      setError(error.message || 'Something went wrong!');
     }
     setIsLoading(false);
   }, []);
