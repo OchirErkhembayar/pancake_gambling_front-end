@@ -9,8 +9,9 @@
   text-decoration: underline;
 }
 
-h2 {
+.athletes h2 {
   text-decoration: none;
+  text-align: center;
 }
 
 .athlete-list {

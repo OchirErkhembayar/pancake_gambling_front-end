@@ -82,7 +82,7 @@ const AuthForm = (props) => {
 
   return (
     <Card className={styles.card}>
-      <form onSubmit={submitHandler}>
+      <form className={styles.form} onSubmit={submitHandler}>
         <div>
           <div className={usernameClasses}>
             <label htmlFor='username'>Username</label>

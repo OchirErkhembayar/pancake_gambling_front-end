@@ -72,3 +72,17 @@
 .cancel:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 470px) {
+  .card {
+    width: 25rem;
+  }
+
+  .form-control {
+    width: 15rem;
+  }
+
+  .button {
+    width: 15rem;
+  }
+}

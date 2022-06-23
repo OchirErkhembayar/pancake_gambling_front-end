@@ -73,7 +73,9 @@ const MatchModal = (props) => {
     <Modal className={styles.modal} onClick={props.onClick}>
       <h1>{props.match.title}</h1>
       <h3>{props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} ({props.athleteTwoOdds})</h3>
-      <h2>Create a bet</h2>
+      <div className={styles.balance}>
+        {userCtx.loggedIn && <h3>Create a bet (Balance: {userCtx.user.balance.toFixed(0)})</h3>}
+      </div>
       <form className={styles.form}>
         <div className={styles.form__input}>
           <div>

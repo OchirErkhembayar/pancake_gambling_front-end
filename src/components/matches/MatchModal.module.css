@@ -59,9 +59,11 @@
 
 .link {
   color: white;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-.link:hover {
-  text-decoration: underline;
+.balance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

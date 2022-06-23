@@ -45,7 +45,7 @@ const Navbar = (props) => {
   if (userCtx.loggedIn) {
     content = (
       <React.Fragment>
-        <p>Balance: {userCtx.user.balance.toFixed(0)} pancakes</p>
+        <p className={`${styles.mobile} ${styles.balance}`}>Balance: {userCtx.user.balance.toFixed(0)} pancakes</p>
         <p className={styles.bets} onClick={showModalHandler}>
           Bets
           {userCtx.user.bets.length > 0
@@ -74,7 +74,7 @@ const Navbar = (props) => {
             </h1>
           </Link>
           {userCtx.loggedIn && (
-            <h3 className={styles.mobile}>Hello, {userCtx.user.username}</h3>
+            <h3 className={`${styles.mobile} ${styles.user}`}>Hello, {userCtx.user.username}</h3>
           )}
         </div>
         <div className={styles.navigation}>

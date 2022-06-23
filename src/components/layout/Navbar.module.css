@@ -53,8 +53,26 @@ a.active {
   text-decoration: underline;
 }
 
-@media (max-width: 600px) {
-  .mobile  {
+@media (max-width: 740px) {
+  .mobile {
+    display: none;
+  }
+  a.active {
+    display: none;
+  }
+  .navbar {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 1132px) {
+  .user {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .balance {
     display: none;
   }
 }

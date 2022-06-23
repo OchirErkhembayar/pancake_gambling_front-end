@@ -5,7 +5,7 @@ import styles from "./MatchesList.module.css";
 import MatchItem from './MatchItem';
 
 const MatchesList = (props) => {
-  let matchList = <h2>No matches found.</h2>;
+  let matchList = <h3 className={styles.matches}>No matches found.</h3>;
 
   if (props.matches.length > 0) {
     matchList = (
@@ -21,11 +21,11 @@ const MatchesList = (props) => {
   let content = matchList;
 
   if (props.error) {
-    content = <h2>Server error. Please try again later.</h2>;
+    content = <h3 className={styles.matches}>Server error. Please try again later.</h3>;
   }
 
   if (props.loading) {
-    content = 'Loading matches...';
+    content = <h3 className={styles.matches}>Loading matches...</h3>;
   }
 
   return (

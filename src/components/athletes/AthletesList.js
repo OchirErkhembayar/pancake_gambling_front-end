@@ -5,7 +5,7 @@ import AthleteItem from './AthleteItem'
 import styles from "./AthletesList.module.css";
 
 const AthletesList = (props) => {
-  let athleteList = <h2>No athletes found.</h2>;
+  let athleteList = <h3 className={styles.athletes}>No athletes found.</h3>;
 
   console.log(props)
 
@@ -25,11 +25,11 @@ const AthletesList = (props) => {
   let content = athleteList;
 
   if (props.error) {
-    content = <h2>Server error. Please try again later.</h2>;
+    content = <h3 className={styles.athletes}>Server error. Please try again later.</h3>;
   }
 
   if (props.loading) {
-    content = 'Loading athletes...';
+    content = <h3 className={styles.athletes}>Loading athletes...</h3>;
   }
 
   return (

@@ -14,7 +14,7 @@ const Athletes = () => {
     const transformAthletes = (athleteObj) => {
       console.log(athleteObj.athletes);
       setAthletes(athleteObj.athletes);
-    };;
+    };
 
     fetchAthletes(
       { url: `${process.env.REACT_APP_URL}/athlete/all-athletes`},
