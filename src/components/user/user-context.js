@@ -45,7 +45,7 @@ export const UserContextProvider = (props) => {
       setUser(userObj.user);
     };
     if (userLoggedIn && !user.username) {
-      if (new Date().getTime() > localStorage.getItem('expiry')) {
+      if (new Date().getTime() > localStorage.getItem('expiry' || localStorage.getItem('token') === null || localStorage.getItem('userId') === null || localStorage.getItem('expiry') === null)) {
         return logoutHandler();
       }
       fetchUser(
@@ -65,7 +65,7 @@ export const UserContextProvider = (props) => {
     setUser(prevState => {
       return {
         ...prevState,
-        bets: prevState.bets.concat(bet)
+        bets: prevState.bets.unshift(bet)
       }
     })
   }

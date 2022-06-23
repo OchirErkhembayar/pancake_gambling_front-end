@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 import styles from "./Banner.module.css";
 
@@ -8,7 +9,7 @@ const Banner = (props) => {
   return (
     <div className={styles.banner}>
       <h1>Pancake Gambling</h1>
-      <Button onClick={props.onNoBanner}>See matches</Button>
+      <Link to="/matches"><Button onClick={props.onNoBanner}>See matches</Button></Link>
     </div>
   )
 }

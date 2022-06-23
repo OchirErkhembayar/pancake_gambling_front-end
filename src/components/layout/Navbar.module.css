@@ -25,13 +25,32 @@
   text-decoration: underline;
 }
 
+.titles {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .bets:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
+.logoButton {
+  text-decoration: none;
+  color: white;
+}
+
 .logoButton:hover {
   cursor: pointer !important;
+}
+
+.logoButton:active {
+  text-decoration: none;
+}
+
+a.active {
+  text-decoration: underline;
 }
 
 @media (max-width: 600px) {

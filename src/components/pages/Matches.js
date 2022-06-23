@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import styles from "./Matches.module.css";
 
-import MatchesList from './MatchesList'
+import MatchesList from "../../components/matches/MatchesList";
 import useHttp from '../../hooks/use-http';
 
 

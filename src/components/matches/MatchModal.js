@@ -1,4 +1,5 @@
 import React, { useRef, useContext } from 'react'
+import { Link } from 'react-router-dom';
 
 import styles from "./MatchModal.module.css";
 import useHttp from '../../hooks/use-http';
@@ -10,7 +11,7 @@ import UserContext from '../user/user-context';
 const MatchModal = (props) => {
   const userCtx = useContext(UserContext);
   const enteredAthlete = useRef();
-  const { sendRequest: createBet } = useHttp();
+  const { isLoading, sendRequest: createBet } = useHttp();
 
   const {
     value: enteredAmount,
@@ -61,10 +62,10 @@ const MatchModal = (props) => {
   if (!userCtx.loggedIn) {
     return (
       <Modal className={styles.modal} onClick={props.onClick}>
-      <h1>{props.match.title}</h1>
-      <h3>{props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} ({props.athleteTwoOdds})</h3>
-      <h3>Login to create a bet</h3>
-    </Modal>
+        <h1>{props.match.title}</h1>
+        <h3>{props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} ({props.athleteTwoOdds})</h3>
+        <h3><Link className={styles.link} to="/auth">Login</Link> to create a bet</h3>
+      </Modal>
     )
   }
 
@@ -102,7 +103,8 @@ const MatchModal = (props) => {
           </div>
         </div>
         <div className={styles.form__actions}>
-          <Button className={styles.button} onClick={onSubmitHandler} type="submit" disabled={!formIsValid}>Make Bet</Button>
+          {!isLoading && <Button className={styles.button} onClick={onSubmitHandler} type="submit" disabled={!formIsValid}>Make Bet</Button>}
+          {isLoading && <Button className={styles.button} type="submit" disabled={true}>Making bet...</Button>}
         </div>
       </form>
     </Modal>

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import useInput from "../../hooks/use-input";
 import Card from "../UI/Card";
@@ -11,6 +12,7 @@ import useHttp from "../../hooks/use-http";
 const isNotEmpty = (value) => value.trim() !== '';
 
 const AuthForm = (props) => {
+  const history = useHistory();
   const userCtx = useContext(UserContext);
   const { isLoading, error, sendRequest: fetchLogin } = useHttp();
 
@@ -41,7 +43,7 @@ const AuthForm = (props) => {
     event.preventDefault();
     const transformUser = (userObj) => {
       userCtx.login(userObj);
-      props.hideLoginPage();
+      history.push("/");
     };
 
     if (!formIsValid) {
@@ -110,7 +112,7 @@ const AuthForm = (props) => {
           {isLoading && <Button className={styles.button} disabled={true}>Logging in...</Button>}
         </div>
       </form>
-      <p className={styles.cancel} onClick={props.hideLoginPage}>Cancel</p>
+      <Link to="/"><Button className={styles.cancel} onClick={props.hideLoginPage}>Cancel</Button></Link>
     </Card>
   );
 };

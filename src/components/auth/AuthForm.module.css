@@ -66,6 +66,7 @@
 .cancel {
   margin: 0;
   cursor: pointer;
+  padding: 0;
 }
 
 .cancel:hover {
