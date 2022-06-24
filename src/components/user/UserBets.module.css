@@ -12,7 +12,7 @@
   overflow: auto;
 }
 
-li:not(:last-child) {
+.bet-list li:not(:last-child) {
   margin-bottom: 1rem;
 }
 

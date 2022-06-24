@@ -1,7 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import Navbar from "./components/layout/Navbar";
+// import Navbar from "./components/layout/Navbar";
+import Navbar2 from "./components/layout/Navbar2";
 // import Footer from "./components/layout/Footer";
 import Banner from "./components/UI/Banner";
 import Matches from "./components/pages/Matches";
@@ -12,7 +13,8 @@ function App() {
 
   return (
     <React.Fragment>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar2 />
         <Route exact path="/">
           <Banner/>
         </Route>

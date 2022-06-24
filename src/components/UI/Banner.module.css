@@ -2,7 +2,7 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0.227),rgba(0, 0, 0, 0.2)), url('./images/BackgroundImage.jpg');
   background-position: center;
   background-size: cover;
-  height: 80vh;
+  height: calc(100vh - 50px);
   display: flex;
   gap: 10px;
   flex-direction: column;
