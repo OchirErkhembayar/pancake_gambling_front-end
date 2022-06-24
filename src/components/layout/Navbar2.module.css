@@ -118,13 +118,7 @@ a.active {
     align-items: center;
     justify-content: right;
     text-decoration: none;
-  }
-  .btn i {
-    text-decoration: none;
-    height: auto;
-    padding-top: 1px;
-  }
-  .btn:hover {
-    text-decoration: none;
+    background-color: transparent;
+    border: none;
   }
 }

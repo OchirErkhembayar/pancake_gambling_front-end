@@ -126,9 +126,9 @@ const Navbar2 = () => {
           </ul>
         )}
 
-        <Button onClick={toggleNav} className={styles.btn}>
+        <button onClick={toggleNav} className={styles.btn}>
           <i className="fa-solid fa-bars"></i>
-        </Button>
+        </button>
       </nav>
     </React.Fragment>
   );
