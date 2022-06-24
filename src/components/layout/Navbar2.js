@@ -94,7 +94,7 @@ const Navbar2 = () => {
         <UserBets bets={userCtx.user.bets} onClick={hideModalHandler} />
       )}
       <nav className={styles.nav}>
-        <div className={styles.title}>
+        <div className={styles.title} onClick={toggleNav}>
           <Link to="/">
             <h1>Pancake Gambling</h1>
           </Link>
