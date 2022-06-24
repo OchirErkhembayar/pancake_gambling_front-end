@@ -59,7 +59,7 @@ const UserBets = (props) => {
     <Modal className={styles.modal} onClick={props.onClick}>
       <h2>Your Bets</h2>
       <div className={styles.filters}>
-        <h3 onClick={setIncompleteHandler} className={incomplete ? styles.active : ''}>Incomplete</h3>
+        <h3 onClick={setIncompleteHandler} className={incomplete ? styles.active : ''}>Active</h3>
         <h3 onClick={setCompleteHandler} className={complete ? styles.active : ''}>Complete</h3>
         <h3 onClick={setAllHandler} className={all ? styles.active : ''}>All</h3>
       </div>
