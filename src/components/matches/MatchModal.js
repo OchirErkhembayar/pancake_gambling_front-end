@@ -1,12 +1,12 @@
-import React, { useRef, useContext } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useRef, useContext } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./MatchModal.module.css";
-import useHttp from '../../hooks/use-http';
-import useInput from '../../hooks/use-input';
-import Modal from '../UI/Modal';
-import Button from '../UI/Button';
-import UserContext from '../user/user-context';
+import useHttp from "../../hooks/use-http";
+import useInput from "../../hooks/use-input";
+import Modal from "../UI/Modal";
+import Button from "../UI/Button";
+import UserContext from "../user/user-context";
 
 const MatchModal = (props) => {
   const userCtx = useContext(UserContext);
@@ -21,7 +21,7 @@ const MatchModal = (props) => {
     inputBlurHandler: amountBlurHandler,
     reset: resetAmountInput,
   } = useInput((value) => {
-    return value > 0 && value <= userCtx.user.balance
+    return value > 0 && value <= userCtx.user.balance;
   });
 
   let formIsValid = false;
@@ -38,80 +38,111 @@ const MatchModal = (props) => {
     const transformUser = (betObj) => {
       console.log(betObj);
       userCtx.onRemovePancakes(betObj.bet.amount);
-      userCtx.onAddBet(betObj.bet)
+      userCtx.onAddBet(betObj.bet);
     };
 
     createBet(
       {
         url: `${process.env.REACT_APP_URL}/bet/create-bet/${userCtx.user.id}/${enteredAthlete.current.value}`,
         body: {
-          amount: enteredAmount
+          amount: enteredAmount,
         },
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + userCtx.token
-        }
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userCtx.token,
+        },
       },
       transformUser
-    )
+    );
     resetAmountInput();
     props.onClick();
-  }
+  };
 
   if (!userCtx.loggedIn) {
     return (
       <Modal className={styles.modal} onClick={props.onClick}>
         <h1>{props.match.title}</h1>
-        <h3>{props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} ({props.athleteTwoOdds})</h3>
-        <h3><Link className={styles.link} to="/auth">Login</Link> to create a bet</h3>
+        <h3>
+          {props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} (
+          {props.athleteTwoOdds})
+        </h3>
+        <h3>
+          <Link className={styles.link} to="/auth">
+            Login
+          </Link>{" "}
+          to create a bet
+        </h3>
       </Modal>
-    )
+    );
   }
 
   return (
     <Modal className={styles.modal} onClick={props.onClick}>
       <h1>{props.match.title}</h1>
-      <h3>{props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} ({props.athleteTwoOdds})</h3>
+      <h3>
+        {props.athleteOne} ({props.athleteOneOdds}) VS {props.athleteTwo} (
+        {props.athleteTwoOdds})
+      </h3>
       <div className={styles.balance}>
-        {userCtx.loggedIn && <h3>Create a bet (Balance: {userCtx.user.balance.toFixed(0)})</h3>}
+        {userCtx.loggedIn && userCtx.user.balance >= 1 && (
+          <h3>Create a bet (Balance: {Math.floor(userCtx.user.balance)})</h3>
+        )}
       </div>
-      <form className={styles.form}>
-        <div className={styles.form__input}>
-          <div>
-            <label htmlFor="athlete">Athlete: </label>
-            <select
-              name="athlete"
-              id="athlete"
-              defaultValue={props.athleteOneMAId}
-              ref={enteredAthlete}
-            >
-              <option value={props.athleteOneMAId}>{props.athleteOne}</option>
-              <option value={props.athleteTwoMAId}>{props.athleteTwo}</option>
-            </select>
+      {Math.floor(userCtx.user.balance) > 0 && (
+        <form className={styles.form}>
+          <div className={styles.form__input}>
+            <div>
+              <label htmlFor="athlete">Athlete: </label>
+              <select
+                name="athlete"
+                id="athlete"
+                defaultValue={props.athleteOneMAId}
+                ref={enteredAthlete}
+              >
+                <option value={props.athleteOneMAId}>{props.athleteOne}</option>
+                <option value={props.athleteTwoMAId}>{props.athleteTwo}</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="amount">Amount: </label>
+              <input
+                name="amount"
+                id="amount"
+                type="number"
+                placeholder="Enter amount here"
+                step={50}
+                onChange={amountChangedHandler}
+                onBlur={amountBlurHandler}
+                value={enteredAmount}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="amount">Amount: </label>
-            <input
-              name="amount"
-              id="amount"
-              type="number"
-              placeholder='Enter amount here'
-              step={50}
-              onChange={amountChangedHandler}
-              onBlur={amountBlurHandler}
-              value={enteredAmount}
-            />
+          <div className={styles.form__actions}>
+            {!isLoading && (
+              <Button
+                className={styles.button}
+                onClick={onSubmitHandler}
+                type="submit"
+                disabled={!formIsValid}
+              >
+                Make Bet
+              </Button>
+            )}
+            {isLoading && (
+              <Button className={styles.button} type="submit" disabled={true}>
+                Making bet...
+              </Button>
+            )}
           </div>
-        </div>
-        <div className={styles.form__actions}>
-          {!isLoading && <Button className={styles.button} onClick={onSubmitHandler} type="submit" disabled={!formIsValid}>Make Bet</Button>}
-          {isLoading && <Button className={styles.button} type="submit" disabled={true}>Making bet...</Button>}
-        </div>
-      </form>
-      <Button className={styles.button} onClick={props.onClick}>Close</Button>
+        </form>
+      )}
+      {!Math.floor(userCtx.user.balance) > 0 && <p>You're out of pancakes!</p>}
+      <Button className={styles.button} onClick={props.onClick}>
+        Close
+      </Button>
     </Modal>
-  )
-}
+  );
+};
 
-export default MatchModal
+export default MatchModal;

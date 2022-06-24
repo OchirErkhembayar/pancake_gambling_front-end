@@ -45,7 +45,7 @@ const Navbar = (props) => {
   if (userCtx.loggedIn) {
     content = (
       <React.Fragment>
-        <p className={`${styles.mobile} ${styles.balance}`}>Balance: {userCtx.user.balance.toFixed(0)} pancakes</p>
+        <p className={`${styles.mobile} ${styles.balance}`}>Balance: {Math.floor(userCtx.user.balance)} pancakes</p>
         <p className={styles.bets} onClick={showModalHandler}>
           Bets
           {userCtx.user.bets.filter(bet => bet.result === null).length > 0
