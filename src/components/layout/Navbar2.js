@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import styles from "./Navbar2.module.css";
-import Button from "../UI/Button";
 import UserContext from "../user/user-context";
 import UserBets from "../user/UserBets";
 
@@ -21,12 +20,16 @@ const Navbar2 = () => {
     window.addEventListener("resize", changeWidth);
   }, []);
 
-  const toggleNav = () => {
-    setToggleMenu((prevState) => !prevState);
+  const closeNav = () => {
+    setToggleMenu(false);
   };
 
+  const toggleNav = () => {
+    setToggleMenu(prevState => !prevState);
+  }
+
   const showModalHandler = () => {
-    toggleNav();
+    closeNav();
     setShowModal(true);
   };
 
@@ -36,12 +39,12 @@ const Navbar2 = () => {
 
   const logoutButtonHandler = () => {
     userCtx.logout();
-    toggleNav();
+    closeNav();
   }
 
   let authButton = (
     <li className={styles.items}>
-      <NavLink activeClassName={styles.active} onClick={toggleNav} to="/auth">
+      <NavLink activeClassName={styles.active} onClick={closeNav} to="/auth">
         Login
       </NavLink>
     </li>
@@ -94,7 +97,7 @@ const Navbar2 = () => {
         <UserBets bets={userCtx.user.bets} onClick={hideModalHandler} />
       )}
       <nav className={styles.nav}>
-        <div className={styles.title} onClick={toggleNav}>
+        <div className={styles.title} onClick={closeNav}>
           <Link to="/">
             <h1>Pancake Gambling</h1>
           </Link>
@@ -106,7 +109,7 @@ const Navbar2 = () => {
             {bets}
             <li className={styles.items}>
               <NavLink
-                onClick={toggleNav}
+                onClick={closeNav}
                 activeClassName={styles.active}
                 to="/matches"
               >
@@ -115,7 +118,7 @@ const Navbar2 = () => {
             </li>
             <li className={styles.items}>
               <NavLink
-                onClick={toggleNav}
+                onClick={closeNav}
                 activeClassName={styles.active}
                 to="/athletes"
               >
