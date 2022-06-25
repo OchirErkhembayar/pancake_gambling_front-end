@@ -1,17 +1,35 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
-import UserBets from "../user/UserBets";
-import Button from "../UI/Button";
 import UserContext from "../user/user-context";
+import UserBets from "../user/UserBets";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const userCtx = useContext(UserContext);
 
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    const changeWidth = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", changeWidth);
+  }, []);
+
+  const closeNav = () => {
+    setToggleMenu(false);
+  };
+
+  const toggleNav = () => {
+    setToggleMenu(prevState => !prevState);
+  }
+
   const showModalHandler = () => {
+    closeNav();
     setShowModal(true);
   };
 
@@ -19,45 +37,61 @@ const Navbar = (props) => {
     setShowModal(false);
   };
 
-  const logoutHandler = () => {
+  const logoutButtonHandler = () => {
     userCtx.logout();
-  };
-
-  if (userCtx.isLoading) {
-    return (
-      <React.Fragment>
-        <nav className={styles.navbar}>
-          <h1 className={`${styles.mobile} ${styles.logoButton}`}>
-            Pancake Gambling
-          </h1>
-          <p>Loading...</p>
-        </nav>
-      </React.Fragment>
-    );
+    closeNav();
   }
 
-  let content = (
-    <Link to="/auth">
-      <Button onClick={props.showLoginPage}>Login</Button>
-    </Link>
+  let authButton = (
+    <li className={styles.items}>
+      <NavLink activeClassName={styles.active} onClick={closeNav} to="/auth">
+        Login
+      </NavLink>
+    </li>
   );
 
   if (userCtx.loggedIn) {
-    content = (
-      <React.Fragment>
-        <p className={`${styles.mobile} ${styles.balance}`}>Balance: {Math.floor(userCtx.user.balance)} pancakes</p>
-        <p className={styles.bets} onClick={showModalHandler}>
-          Bets
-          {userCtx.user.bets.filter(bet => bet.result === null).length > 0
-            ? `(${
-                userCtx.user.bets.filter((bet) => bet.result === null).length
-              })`
-            : ""}
-        </p>
-        <Button onClick={logoutHandler} className={styles.Button}>
-          logout
-        </Button>
-      </React.Fragment>
+    authButton = (
+      <li className={`${styles.items} ${styles.hover}`} onClick={logoutButtonHandler}>
+        Logout
+      </li>
+    );
+  }
+
+  let bets;
+  let balance;
+
+  if (!userCtx.loggedIn) {
+    bets = null;
+    balance = null;
+  }
+
+  if (!userCtx.isLoading && userCtx.loggedIn) {
+    bets = (
+      <li className={`${styles.items} ${styles.hover}`} onClick={showModalHandler}>
+        Bets
+        {userCtx.user.bets.filter((bet) => bet.result === null).length > 0
+          ? `(${userCtx.user.bets.filter((bet) => bet.result === null).length})`
+          : ""}
+      </li>
+    );
+    balance = (
+      <li className={`${styles.items} ${styles.nonHover} ${styles.balance}`}>
+        Balance: {Math.floor(userCtx.user.balance)} pancakes
+      </li>
+    );
+  }
+
+  if (userCtx.isLoading) {
+    balance = (
+      <li className={`${styles.items} ${styles.noPointer}`}>
+        Loading...
+      </li>
+    );
+    bets = (
+      <li className={`${styles.items} ${styles.noPointer}`}>
+        Loading...
+      </li>
     );
   }
 
@@ -66,26 +100,42 @@ const Navbar = (props) => {
       {showModal && (
         <UserBets bets={userCtx.user.bets} onClick={hideModalHandler} />
       )}
-      <nav className={styles.navbar}>
-        <div className={styles.titles}>
-          <Link className={styles.logoButton} to="/">
-            <h1 className={`${styles.mobile} ${styles.logoButton}`}>
-              Pancake Gambling
-            </h1>
+      <nav className={styles.nav}>
+        <div className={styles.title} onClick={closeNav}>
+          <Link to="/">
+            <h1>Pancake Gambling</h1>
           </Link>
-          {userCtx.loggedIn && (
-            <h3 className={`${styles.mobile} ${styles.user}`}>Hello, {userCtx.user.username}</h3>
-          )}
+          { userCtx.loggedIn && !userCtx.isLoading && <h3 className={styles.username}>Hello, {userCtx.user.username}</h3>}
         </div>
-        <div className={styles.navigation}>
-          <NavLink activeClassName={styles.active} to="/matches">
-            Matches
-          </NavLink>
-          <NavLink activeClassName={styles.active} to="/athletes">
-            Athletes
-          </NavLink>
-          {content}
-        </div>
+        {(toggleMenu || screenWidth > 610) && (
+          <ul className={styles.list}>
+            {balance}
+            {bets}
+            <li className={styles.items}>
+              <NavLink
+                onClick={closeNav}
+                activeClassName={styles.active}
+                to="/matches"
+              >
+                Matches
+              </NavLink>
+            </li>
+            <li className={styles.items}>
+              <NavLink
+                onClick={closeNav}
+                activeClassName={styles.active}
+                to="/athletes"
+              >
+                Athletes
+              </NavLink>
+            </li>
+            {authButton}
+          </ul>
+        )}
+
+        <button onClick={toggleNav} className={styles.btn}>
+          <i className="fa-solid fa-bars"></i>
+        </button>
       </nav>
     </React.Fragment>
   );

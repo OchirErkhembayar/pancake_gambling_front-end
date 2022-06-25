@@ -11,7 +11,7 @@ import UserContext from "../user/user-context";
 const MatchModal = (props) => {
   const userCtx = useContext(UserContext);
   const enteredAthlete = useRef();
-  const { isLoading, sendRequest: createBet } = useHttp();
+  const { error, isLoading, sendRequest: createBet } = useHttp();
 
   const {
     value: enteredAmount,
@@ -36,7 +36,7 @@ const MatchModal = (props) => {
       return;
     }
     const transformUser = (betObj) => {
-      console.log(betObj);
+      props.onClick();
       userCtx.onRemovePancakes(betObj.bet.amount);
       userCtx.onAddBet(betObj.bet);
     };
@@ -56,7 +56,6 @@ const MatchModal = (props) => {
       transformUser
     );
     resetAmountInput();
-    props.onClick();
   };
 
   if (!userCtx.loggedIn) {
@@ -119,7 +118,7 @@ const MatchModal = (props) => {
             </div>
           </div>
           <div className={styles.form__actions}>
-            {!isLoading && (
+            {!isLoading && !error && (
               <Button
                 className={styles.button}
                 onClick={onSubmitHandler}
@@ -129,9 +128,14 @@ const MatchModal = (props) => {
                 Make Bet
               </Button>
             )}
-            {isLoading && (
+            {isLoading && !error && (
               <Button className={styles.button} type="submit" disabled={true}>
                 Making bet...
+              </Button>
+            )}
+            {!isLoading && error && (
+              <Button className={styles.button} type="submit" disabled={true}>
+                Failed to create bet. Please try again later.
               </Button>
             )}
           </div>

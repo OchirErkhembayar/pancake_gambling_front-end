@@ -1,51 +1,65 @@
-/* .navbar {
-  display: flex;
-  padding: 0 2rem;
-  margin: 0 1rem;
-  height: 12vh;
-  justify-content: space-between;
-  align-items: center;
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
   border-bottom: 1px solid rgb(72, 66, 86);
+  background-color: #0d0a17;
 }
 
-.navigation {
-  gap: 3rem;
-  align-items: center;
-  display: flex;
-  justify-content: space-evenly;
+@media (min-width: 611px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
-.navigation a {
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
+.nav h1 {
+  margin-left: 20px;
+  margin-top: 17px;
+  margin-bottom: 0px;
 }
 
-.navigation a:hover {
-  text-decoration: underline;
-}
-
-.titles {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.bets:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.logoButton {
+.nav a {
   text-decoration: none;
   color: white;
 }
 
-.logoButton:hover {
-  cursor: pointer !important;
+.nav a:hover {
+  text-decoration: underline;
 }
 
-.logoButton:active {
+.hover:hover {
+  text-decoration: underline;
+}
+
+.list {
+  list-style-type: none;
+  background-color: #0d0a17;
+  height: 100%;
+  display: flex;
+  justify-content: right;
+  height: auto;
+  padding-top: 21px;
+  position: relative;
+  padding-left: 0;
+  margin: 0;
+}
+
+.items {
+  margin-right: 20px;
+  color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 11px;
+  padding: 5px;
+  color: white;
+  font-size: 18px;
   text-decoration: none;
 }
 
@@ -53,26 +67,58 @@ a.active {
   text-decoration: underline;
 }
 
-@media (max-width: 740px) {
-  .mobile {
+.noPointer {
+  cursor: not-allowed;
+}
+
+.nonHover {
+  cursor: default;
+}
+
+.title {
+  display: flex;
+  gap: 2rem;
+}
+
+.username {
+  height: auto;
+  margin-top: 21px;
+}
+
+@media (max-width: 1000px) {
+  .username {
     display: none;
-  }
-  a.active {
-    display: none;
-  }
-  .navbar {
-    gap: 1rem;
   }
 }
 
-@media (max-width: 1132px) {
-  .user {
-    display: none;
-  }
-}
-
-@media (max-width: 960px) {
+@media only screen and (min-width: 611px) and (max-width: 800px) {
   .balance {
     display: none;
   }
-} */
+}
+
+@media screen and (max-width: 610px) {
+  .list {
+    flex-direction: column;
+    height: auto;
+  }
+  .items:nth-child(1) {
+    border-top: 1px solid rgb(72, 66, 86);
+    margin-top: -12px;
+  }
+  .items {
+    width: 100%;
+    border-bottom: 1px solid rgb(72, 66, 86);
+    text-align: center;
+    margin-right: 0px;
+    padding: 20px 0;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+  }
+}
