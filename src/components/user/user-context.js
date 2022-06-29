@@ -188,14 +188,11 @@ export const UserContextProvider = (props) => {
 
   const deleteFriendHandler = (id) => {
     const transformFriends = (friendObj) => {
-      console.log(friendObj);
       const friends = [...user.friends];
-      console.log(friends);
       const index = friends.findIndex(f => f.id === friendObj.friend.id);
       if (index > -1) {
         friends.splice(index, 1);
       }
-      console.log(friends);
       setUser({
         ...user,
         friends: friends
