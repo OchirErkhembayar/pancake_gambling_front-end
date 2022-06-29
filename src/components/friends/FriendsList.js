@@ -15,7 +15,7 @@ const FriendsList = (props) => {
   let friendsList = <h1>No friends yet!</h1>;
 
   if (userCtx.isLoading) {
-    friendsList = <h1>Loading friends list...</h1>;
+    friendsList = <p>Loading friends list...</p>;
   }
 
   if (!userCtx.loggedIn && !userCtx.isLoading) {

@@ -12,7 +12,13 @@ const UserContext = React.createContext({
   onRemovePancakes: (amount) => {},
   onAddBet: () => {},
   addFriend: () => {},
+  addFriendLoading: false,
   acceptFriend: () => {},
+  acceptFriendLoading: false,
+  declineFriend: () => {},
+  declineFriendLoading: false,
+  deleteFriend: () => {},
+  deleteFriendLoading: false,
   isLoading: false,
 });
 
@@ -45,6 +51,10 @@ export const UserContextProvider = (props) => {
   const { isLoading: addLoading, sendRequest: fetchAddFriend } = useHttp();
 
   const { isLoading: acceptingLoading, sendRequest: fetchAcceptRequest } = useHttp();
+
+  const { isLoading: decliningLoading, sendRequest: fetchDeclineRequest } = useHttp();
+
+  const { isLoading: deletingLoading, sendRequest: fetchDeleteFriend } = useHttp();
 
   useEffect(() => {
     const transformUser = (userObj) => {
@@ -98,6 +108,12 @@ export const UserContextProvider = (props) => {
   const addFriendHandler = (id) => {
     const transformFriends = (friendObj) => {
       console.log(friendObj);
+      const newFriends = [...user.friends];
+      newFriends.push(friendObj.friend);
+      setUser({
+        ...user,
+        friends: newFriends
+      });
     }
 
     fetchAddFriend(
@@ -147,6 +163,70 @@ export const UserContextProvider = (props) => {
     );
   }
 
+  const declineFriend = (id) => {
+    const transformFriends = (friendObj) => {
+      console.log(friendObj);
+      const friends = [...user.friends];
+      console.log(friends);
+      const index = friends.findIndex(f => f.id === friendObj.friend.id);
+      if (index > -1) {
+        friends.splice(index, 1);
+      }
+      console.log(friends);
+      setUser({
+        ...user,
+        friends: friends
+      });
+    }
+
+    fetchDeclineRequest(
+      {
+        url: `${process.env.REACT_APP_URL}/friend/decline`,
+        body: {
+          userFriendId: id
+        },
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      },
+      transformFriends
+    );
+  }
+
+  const deleteFriendHandler = (id) => {
+    const transformFriends = (friendObj) => {
+      console.log(friendObj);
+      const friends = [...user.friends];
+      console.log(friends);
+      const index = friends.findIndex(f => f.id === friendObj.friend.id);
+      if (index > -1) {
+        friends.splice(index, 1);
+      }
+      console.log(friends);
+      setUser({
+        ...user,
+        friends: friends
+      });
+    }
+
+    fetchDeleteFriend(
+      {
+        url: `${process.env.REACT_APP_URL}/friend/delete`,
+        body: {
+          userFriendId: id
+        },
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      },
+      transformFriends
+    );
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -160,7 +240,13 @@ export const UserContextProvider = (props) => {
         onRemovePancakes: removePancakesHandler,
         onAddBet: addBetHandler,
         addFriend: addFriendHandler,
-        acceptFriend: acceptFriendRequestHandler
+        addFriendLoading: addLoading,
+        acceptFriend: acceptFriendRequestHandler,
+        acceptFriendLoading: acceptingLoading,
+        declineFriend: declineFriend,
+        declineFriendLoading: decliningLoading,
+        deleteFriend: deleteFriendHandler,
+        deleteFriendLoading: deletingLoading
       }}
     >
       {props.children}

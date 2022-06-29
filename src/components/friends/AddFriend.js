@@ -20,13 +20,6 @@ const AddFriend = () => {
     removeError: removeUsersError,
   } = useHttp();
 
-  const {
-    isLoading: addingFriend,
-    error: addError,
-    sendRequest: fetchAddFriend,
-    removeError: removeAddError,
-  } = useHttp();
-
   const submitHandler = (e) => {
     e.preventDefault();
     const username = usernameRef.current.value;
@@ -46,14 +39,21 @@ const AddFriend = () => {
         return (
           <Card
             onClick={() => {
-              userCtx.addFriend(user.id);
-              setUsers(null);
+              if (!userCtx.addFriendLoading) {
+                userCtx.addFriend(user.id);
+                setUsers(null);
+              }
             }}
             key={user.id}
             className={styles.user}
           >
-            <p>{user.username}</p>
-            <i className={`fa-solid fa-plus ${styles.icon}`}></i>
+            {!userCtx.addFriendLoading && (
+              <React.Fragment>
+                <p>{user.username}</p>
+                <i className={`fa-solid fa-plus ${styles.icon}`}></i>
+              </React.Fragment>
+            )}
+            {userCtx.addFriendLoading && <p>Adding friend...</p>}
           </Card>
         );
       });

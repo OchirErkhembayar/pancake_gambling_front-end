@@ -21,13 +21,20 @@ const FriendRequests = (props) => {
               <Card className={styles.request}>
                 <p>{request.user.username}</p>
                 <div className={styles.actions}>
-                  <i
-                    onClick={() => {
-                      userCtx.acceptFriend(request.id)
-                    }}
-                    className={`fa-solid fa-check ${styles.accept}`}
-                  ></i>
-                  <i className={`fa-solid fa-xmark ${styles.decline}`}></i>
+                  {(userCtx.addFriendLoading || userCtx.declineFriendLoading) && <p>Loading...</p>}
+                  {!userCtx.addFriendLoading && !userCtx.declineFriendLoading && (
+                    <React.Fragment>
+                      <i
+                        onClick={() => {
+                          userCtx.acceptFriend(request.id);
+                        }}
+                        className={`fa-solid fa-check ${styles.accept}`}
+                      ></i>
+                      <i onClick={() => {
+                        userCtx.declineFriend(request.id)
+                      }} className={`fa-solid fa-xmark ${styles.decline}`}></i>
+                    </React.Fragment>
+                  )}
                 </div>
               </Card>
             </li>

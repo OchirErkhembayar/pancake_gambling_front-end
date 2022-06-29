@@ -6,7 +6,7 @@ import Modal from '../UI/Modal';
 
 const FriendModal = (props) => {
   return (
-    <Modal onClick={props.onClick}>{props.friend.username}</Modal>
+    <Modal className={styles.modal} onClick={props.onClick}>{props.friend.username}</Modal>
   )
 }
 
