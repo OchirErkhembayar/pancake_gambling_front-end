@@ -8,6 +8,7 @@ import Banner from "./components/UI/Banner";
 import Matches from "./components/pages/Matches";
 import Auth from "./components/auth/Auth";
 import Athletes from "./components/pages/Athletes";
+import Friends from "./components/pages/Friends";
 
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/auth">
           <Auth />
+        </Route>
+        <Route path="/friends">
+          <Friends />
         </Route>
       {/* <Footer /> */}
     </React.Fragment>

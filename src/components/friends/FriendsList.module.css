@@ -1,0 +1,89 @@
+.friends {
+  padding: 1rem 2rem;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friends h1 {
+  margin: 1rem 0 0 0;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.friends-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.friend-item {
+  margin-bottom: 1rem;
+  text-align: left;
+  width: 250px;
+  height: 80px;
+  border: 1px solid white;
+}
+
+.friend-item h3 h4 {
+  margin: 0;
+}
+
+.friend-item:last-child {
+  margin-bottom: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.hover:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.card {
+  background-color: #B64251;
+  border: 1px solid white;
+  margin: 5rem 5.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 680px) {
+  .card {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+
+  .card h1 {
+    font-size: 1.2rem;
+  }
+
+  .card a {
+    font-size: 1rem;
+  }
+}

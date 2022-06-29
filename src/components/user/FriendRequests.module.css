@@ -1,0 +1,45 @@
+.modal {
+  border: 2px solid white;
+  text-align: center;
+}
+
+.default {
+  text-align: center;
+}
+
+.requests-list {
+  list-style: none;
+  padding: 0 1rem;
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.request {
+  color: black;
+  background-color: white !important;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  gap: 1rem;
+}
+
+.actions i {
+  cursor: pointer;
+}
+
+.accept {
+  color: green;
+}
+
+.decline {
+  color: red;
+}

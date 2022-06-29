@@ -7,7 +7,7 @@ nav {
   background-color: #0d0a17;
 }
 
-@media (min-width: 611px) {
+@media (min-width: 688px) {
   nav {
     display: flex;
     justify-content: space-between;
@@ -80,24 +80,28 @@ a.active {
   gap: 2rem;
 }
 
+.icon {
+  font-size: 1rem;
+}
+
 .username {
   height: auto;
   margin-top: 21px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1070px) {
   .username {
     display: none;
   }
 }
 
-@media only screen and (min-width: 611px) and (max-width: 800px) {
+@media only screen and (min-width: 688px) and (max-width: 883px) {
   .balance {
     display: none;
   }
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 687px) {
   .list {
     flex-direction: column;
     height: auto;

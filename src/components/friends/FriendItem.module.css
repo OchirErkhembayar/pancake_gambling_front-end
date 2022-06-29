@@ -1,0 +1,31 @@
+.friend {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.friend h2 {
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+/* .bet {
+  font-size: 0.9rem;
+} */
+
+/* .bet:hover {
+  font-size: 1.1rem;
+} */
+
+.decline {
+  text-align: center;
+  color: red;
+}
+
+.decline:hover {
+  cursor: pointer;
+  font-size: 1.2rem;
+}

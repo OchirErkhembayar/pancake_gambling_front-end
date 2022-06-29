@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import UserContext from "../user/user-context";
 import UserBets from "../user/UserBets";
+import FriendRequests from "../user/FriendRequests";
 
 const Navbar = () => {
   const userCtx = useContext(UserContext);
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showModal, setShowModal] = useState(false);
+  const [showFriendsModal, setShowFriendsModal] = useState(false);
 
   useEffect(() => {
     const changeWidth = () => {
@@ -25,8 +27,8 @@ const Navbar = () => {
   };
 
   const toggleNav = () => {
-    setToggleMenu(prevState => !prevState);
-  }
+    setToggleMenu((prevState) => !prevState);
+  };
 
   const showModalHandler = () => {
     closeNav();
@@ -37,10 +39,20 @@ const Navbar = () => {
     setShowModal(false);
   };
 
+  const showFriendsListModalHandler = () => {
+    closeNav();
+    setShowFriendsModal(true);
+  };
+
+  const hideFriendsListModalHandler = () => {
+    closeNav();
+    setShowFriendsModal(false);
+  };
+
   const logoutButtonHandler = () => {
     userCtx.logout();
     closeNav();
-  }
+  };
 
   let authButton = (
     <li className={styles.items}>
@@ -50,25 +62,46 @@ const Navbar = () => {
     </li>
   );
 
+  let friendsButton = null;
+
   if (userCtx.loggedIn) {
     authButton = (
-      <li className={`${styles.items} ${styles.hover}`} onClick={logoutButtonHandler}>
+      <li
+        className={`${styles.items} ${styles.hover}`}
+        onClick={logoutButtonHandler}
+      >
         Logout
+      </li>
+    );
+    friendsButton = (
+      <li className={styles.items}>
+        <NavLink
+          onClick={closeNav}
+          activeClassName={styles.active}
+          to="/friends"
+        >
+          Friends
+        </NavLink>
       </li>
     );
   }
 
   let bets;
   let balance;
+  let friends;
 
   if (!userCtx.loggedIn) {
     bets = null;
     balance = null;
+    friends = null;
   }
 
   if (!userCtx.isLoading && userCtx.loggedIn) {
     bets = (
-      <li className={`${styles.items} ${styles.hover}`} onClick={showModalHandler}>
+      <li
+        className={`${styles.items} ${styles.hover}`}
+        onClick={showModalHandler}
+      >
         Bets
         {userCtx.user.bets.filter((bet) => bet.result === null).length > 0
           ? `(${userCtx.user.bets.filter((bet) => bet.result === null).length})`
@@ -80,23 +113,41 @@ const Navbar = () => {
         Balance: {Math.floor(userCtx.user.balance)} pancakes
       </li>
     );
+    friends = (
+      <li className={`${styles.items}`} onClick={showFriendsListModalHandler}>
+        <i className={`${styles.icon} fa-solid fa-user-group`}></i>
+        {userCtx.user.friends.filter((f) => !f.accepted && f.sender).length > 0
+          ? ` (${
+              userCtx.user.friends.filter((f) => !f.accepted && f.sender)
+                .length
+            })`
+          : ""}
+      </li>
+    );
+    if (
+      userCtx.user.friends.filter((f) => !f.accepted && f.sender).length === 0
+    ) {
+      friends = null;
+    }
   }
 
   if (userCtx.isLoading) {
     balance = (
-      <li className={`${styles.items} ${styles.noPointer}`}>
-        Loading...
-      </li>
+      <li className={`${styles.items} ${styles.noPointer}`}>Loading...</li>
     );
     bets = (
-      <li className={`${styles.items} ${styles.noPointer}`}>
-        Loading...
-      </li>
+      <li className={`${styles.items} ${styles.noPointer}`}>Loading...</li>
+    );
+    friends = (
+      <li className={`${styles.items} ${styles.noPointer}`}>Loading...</li>
     );
   }
 
   return (
     <React.Fragment>
+      {showFriendsModal && (
+        <FriendRequests onClick={hideFriendsListModalHandler} />
+      )}
       {showModal && (
         <UserBets bets={userCtx.user.bets} onClick={hideModalHandler} />
       )}
@@ -105,12 +156,16 @@ const Navbar = () => {
           <Link to="/">
             <h1>Pancake Gambling</h1>
           </Link>
-          { userCtx.loggedIn && !userCtx.isLoading && <h3 className={styles.username}>Hello, {userCtx.user.username}</h3>}
+          {userCtx.loggedIn && !userCtx.isLoading && (
+            <h3 className={styles.username}>Hello, {userCtx.user.username}</h3>
+          )}
         </div>
-        {(toggleMenu || screenWidth > 610) && (
+        {(toggleMenu || screenWidth > 687) && (
           <ul className={styles.list}>
             {balance}
             {bets}
+            {friends}
+            {friendsButton}
             <li className={styles.items}>
               <NavLink
                 onClick={closeNav}

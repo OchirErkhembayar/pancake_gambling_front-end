@@ -11,7 +11,9 @@ const UserContext = React.createContext({
   onAddPancakes: (amount) => {},
   onRemovePancakes: (amount) => {},
   onAddBet: () => {},
-  isLoading: false
+  addFriend: () => {},
+  acceptFriend: () => {},
+  isLoading: false,
 });
 
 export const UserContextProvider = (props) => {
@@ -39,6 +41,10 @@ export const UserContextProvider = (props) => {
   }
 
   const { isLoading, sendRequest: fetchUser } = useHttp();
+
+  const { isLoading: addLoading, sendRequest: fetchAddFriend } = useHttp();
+
+  const { isLoading: acceptingLoading, sendRequest: fetchAcceptRequest } = useHttp();
 
   useEffect(() => {
     const transformUser = (userObj) => {
@@ -89,6 +95,58 @@ export const UserContextProvider = (props) => {
     });
   }
 
+  const addFriendHandler = (id) => {
+    const transformFriends = (friendObj) => {
+      console.log(friendObj);
+    }
+
+    fetchAddFriend(
+      {
+        url: `${process.env.REACT_APP_URL}/friend/send-request`,
+        body: {
+          friendId: id
+        },
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      },
+      transformFriends
+    );
+  }
+
+  const acceptFriendRequestHandler = (ufId) => {
+    const transformFriends = (friendObj) => {
+      console.log(friendObj);
+      const friends = [...user.friends];
+      console.log(friends);
+      const index = friends.findIndex(f => f.id === friendObj.friend.id);
+      console.log(index);
+      friends[index].accepted = true;
+      console.log(friends[index]);
+      setUser({
+        ...user,
+        friends: friends
+      });
+    }
+
+    fetchAcceptRequest(
+      {
+        url: `${process.env.REACT_APP_URL}/friend/accept`,
+        body: {
+          userFriendId: ufId
+        },
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      },
+      transformFriends
+    );
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -100,7 +158,9 @@ export const UserContextProvider = (props) => {
         loggedIn: !!user.username,
         onAddPancakes: addPancakesHandler,
         onRemovePancakes: removePancakesHandler,
-        onAddBet: addBetHandler
+        onAddBet: addBetHandler,
+        addFriend: addFriendHandler,
+        acceptFriend: acceptFriendRequestHandler
       }}
     >
       {props.children}
