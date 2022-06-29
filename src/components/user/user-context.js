@@ -97,7 +97,6 @@ export const UserContextProvider = (props) => {
 
   const removePancakesHandler = (amount) => {
     setUser(prevState => {
-      console.log(prevState)
       return {
         ...prevState,
         balance: prevState.balance - amount
@@ -107,7 +106,6 @@ export const UserContextProvider = (props) => {
 
   const addFriendHandler = (id) => {
     const transformFriends = (friendObj) => {
-      console.log(friendObj);
       const newFriends = [...user.friends];
       newFriends.push(friendObj.friend);
       setUser({
@@ -134,13 +132,9 @@ export const UserContextProvider = (props) => {
 
   const acceptFriendRequestHandler = (ufId) => {
     const transformFriends = (friendObj) => {
-      console.log(friendObj);
       const friends = [...user.friends];
-      console.log(friends);
       const index = friends.findIndex(f => f.id === friendObj.friend.id);
-      console.log(index);
       friends[index].accepted = true;
-      console.log(friends[index]);
       setUser({
         ...user,
         friends: friends
@@ -165,14 +159,11 @@ export const UserContextProvider = (props) => {
 
   const declineFriend = (id) => {
     const transformFriends = (friendObj) => {
-      console.log(friendObj);
       const friends = [...user.friends];
-      console.log(friends);
       const index = friends.findIndex(f => f.id === friendObj.friend.id);
       if (index > -1) {
         friends.splice(index, 1);
       }
-      console.log(friends);
       setUser({
         ...user,
         friends: friends

@@ -17,7 +17,6 @@ const useHttp = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        console.log(data, "DATA");
         let message = "Something went wrong!"
         if (data.message) {
           message = data.message
@@ -28,7 +27,6 @@ const useHttp = () => {
       setError(null);
       applyData(data);
     } catch (error) {
-      console.log(error.message, "ERROR")
       setError(error.message || 'Something went wrong!');
     }
     setIsLoading(false);

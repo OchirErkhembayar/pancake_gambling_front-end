@@ -153,13 +153,13 @@ const AuthForm = () => {
       ? styles["form-control"] + " invalid"
       : styles["form-control"];
 
-  if (loginError) {
-    console.log(loginError);
-  }
+  // if (loginError) {
+  //   console.log(loginError);
+  // }
 
-  if (signupError) {
-    console.log(signupError, "Signup Error");
-  }
+  // if (signupError) {
+  //   console.log(signupError, "Signup Error");
+  // }
 
   if (loginLoading) {
     return (

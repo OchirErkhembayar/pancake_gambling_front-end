@@ -14,7 +14,6 @@ const FriendItem = (props) => {
   const user = props.friend.user;
 
   const deleteFriendHandler = () => {
-    console.log(props.friend);
     userCtx.deleteFriend(props.friend.id);
   };
 

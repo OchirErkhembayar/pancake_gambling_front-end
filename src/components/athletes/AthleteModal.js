@@ -18,7 +18,6 @@ const AthleteModal = (props) => {
 
   useEffect(() => {
     const transformMatches = (matchObj) => {
-      console.log(matchObj.matches);
       setMatches(matchObj.matches);
     };
 
