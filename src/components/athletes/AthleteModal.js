@@ -80,7 +80,7 @@ const AthleteModal = (props) => {
                 (athlete) => athlete.id !== props.athlete.id
               );
               return (
-                <Card className={styles.card}>
+                <Card key={match.match.id} className={styles.card}>
                   <h4 className={styles.underline}>{match.match.title}</h4>
                   <p>Date: {match.match.date.substring(0, 10)}</p>
                   <p>
