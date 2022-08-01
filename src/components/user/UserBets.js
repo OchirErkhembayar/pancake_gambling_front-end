@@ -155,8 +155,8 @@ const UserBets = (props) => {
                   </div>
                   <div>
                     <p>
-                      Win condition: {winner.firstName} {winner.lastName} defeats{" "}
-                      {loser.firstName} {loser.lastName}
+                      Win condition: {loser.firstName} {loser.lastName} defeats{" "}
+                      {winner.firstName} {winner.lastName}
                     </p>
                   </div>
                   <div className={styles.actions}>
