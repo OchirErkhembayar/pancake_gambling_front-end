@@ -64,7 +64,7 @@ const Navbar = (props) => {
   return (
     <React.Fragment>
       {showModal && (
-        <UserBets bets={userCtx.user.bets} onClick={hideModalHandler} />
+        <UserBets privateBets={userCtx.user.privateBets} bets={userCtx.user.bets} onClick={hideModalHandler} />
       )}
       <nav className={styles.navbar}>
         <div className={styles.titles}>

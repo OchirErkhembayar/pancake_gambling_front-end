@@ -34,12 +34,49 @@
   justify-content: left;
   gap: 1rem;
   padding: 0 1rem;
+  flex-flow: row wrap;
+  align-content: center;
 }
 
 .filters h3 {
   cursor: pointer;
+  margin: 1rem 0 0 0;
 }
 
 .active {
   text-decoration: underline;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.accept {
+  color: green;
+}
+
+.accept:hover {
+  font-size: large;
+  cursor: pointer;
+}
+
+.decline {
+  color: red;
+}
+
+.decline:hover {
+  font-size: large;
+  cursor: pointer;
+}
+
+.privateBets {
+  background-color: white !important;
+  color: black;
 }

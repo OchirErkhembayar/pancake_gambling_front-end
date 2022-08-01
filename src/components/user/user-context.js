@@ -11,6 +11,8 @@ const UserContext = React.createContext({
   onAddPancakes: (amount) => {},
   onRemovePancakes: (amount) => {},
   onAddBet: () => {},
+  onAddPrivateBet: () => {},
+  onRemovePrivateBet: () => {},
   addFriend: () => {},
   addFriendLoading: false,
   acceptFriend: () => {},
@@ -82,6 +84,24 @@ export const UserContextProvider = (props) => {
       return {
         ...prevState,
         bets: prevState.bets.concat(bet)
+      }
+    })
+  }
+
+  const addPrivateBetHandler = (bet) => {
+    setUser(prevState => {
+      return {
+        ...prevState,
+        privateBets: prevState.privateBets.push(bet)
+      }
+    })
+  }
+
+  const onRemovePrivateBet = (betId) => {
+    setUser(prevState => {
+      return {
+        ...prevState,
+        privateBets: prevState.privateBets.filter(pb => pb.id !== betId)
       }
     })
   }
@@ -227,6 +247,8 @@ export const UserContextProvider = (props) => {
         onAddPancakes: addPancakesHandler,
         onRemovePancakes: removePancakesHandler,
         onAddBet: addBetHandler,
+        onAddPrivateBet: addPrivateBetHandler,
+        onRemovePrivateBet: onRemovePrivateBet,
         addFriend: addFriendHandler,
         addFriendLoading: addLoading,
         acceptFriend: acceptFriendRequestHandler,

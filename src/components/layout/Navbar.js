@@ -96,16 +96,28 @@ const Navbar = () => {
     friends = null;
   }
 
+  let betCount = "";
+  if (userCtx.user.privateBets) {
+    betCount =
+      userCtx.user.privateBets.filter(
+        (bet) => bet.privateBetUsers[0].confirmed === false
+      ).length > 0
+        ? `(${
+            userCtx.user.privateBets.filter(
+              (bet) => bet.privateBetUsers[0].confirmed === false
+            ).length
+          })`
+        : "";
+  }
+
+
   if (!userCtx.isLoading && userCtx.loggedIn) {
     bets = (
       <li
         className={`${styles.items} ${styles.hover}`}
         onClick={showModalHandler}
       >
-        Bets
-        {userCtx.user.bets.filter((bet) => bet.result === null).length > 0
-          ? `(${userCtx.user.bets.filter((bet) => bet.result === null).length})`
-          : ""}
+        Bets{betCount}
       </li>
     );
     balance = (
@@ -118,8 +130,7 @@ const Navbar = () => {
         <i className={`${styles.icon} fa-solid fa-user-group`}></i>
         {userCtx.user.friends.filter((f) => !f.accepted && f.sender).length > 0
           ? ` (${
-              userCtx.user.friends.filter((f) => !f.accepted && f.sender)
-                .length
+              userCtx.user.friends.filter((f) => !f.accepted && f.sender).length
             })`
           : ""}
       </li>
@@ -149,7 +160,11 @@ const Navbar = () => {
         <FriendRequests onClick={hideFriendsListModalHandler} />
       )}
       {showModal && (
-        <UserBets bets={userCtx.user.bets} onClick={hideModalHandler} />
+        <UserBets
+          privateBets={userCtx.user.privateBets}
+          bets={userCtx.user.bets}
+          onClick={hideModalHandler}
+        />
       )}
       <nav className={styles.nav}>
         <div className={styles.title} onClick={closeNav}>

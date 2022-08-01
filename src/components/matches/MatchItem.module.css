@@ -29,3 +29,9 @@
     display: none;
   }
 }
+
+@media (max-width: 385px) {
+  .match-item {
+    height: 170px;
+  }
+}

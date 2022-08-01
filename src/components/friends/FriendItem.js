@@ -38,9 +38,9 @@ const FriendItem = (props) => {
       )}
       <Card className={`${props.className} ${styles.friend}`}>
         <h2>{user.username}</h2>
-        <Button onClick={() => setShowModal(true)} className={styles.bet}>
+        {/* <Button onClick={() => setShowModal(true)} className={styles.bet}>
           Create private bet
-        </Button>
+        </Button> */}
         <i
           onClick={deleteFriendHandler}
           className={`fa-solid fa-xmark ${styles.decline}`}
