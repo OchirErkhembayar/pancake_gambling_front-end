@@ -100,7 +100,7 @@ const UserBets = (props) => {
         return (
           bet.privateBetUsers[0].result === null &&
           bet.privateBetUsers[0].confirmed === false &&
-          bet.privateBetUsers[0].sender === false
+          bet.privateBetUsers.find(pb => pb.userId === userCtx.user.id).sender === false
         );
       });
     }
@@ -109,7 +109,7 @@ const UserBets = (props) => {
         return (
           bet.privateBetUsers[0].confirmed === true
         );
-      });
+      }).reverse();
     }
     list = (
       <ul className={styles["bet-list"]}>
@@ -265,6 +265,20 @@ const UserBets = (props) => {
     setViewPrivateBets(true);
   };
 
+  let betCount = "";
+  if (userCtx.user.privateBets) {
+    betCount =
+      userCtx.user.privateBets.filter(
+        (bet) => bet.privateBetUsers[0].confirmed === false && bet.privateBetUsers[0].sender === false
+      ).length > 0
+        ? `(${
+            userCtx.user.privateBets.filter(
+              (bet) => bet.privateBetUsers[0].confirmed === false && bet.privateBetUsers[0].sender === false
+            ).length
+          })`
+        : "";
+  }
+
   return (
     <Modal className={styles.modal} onClick={props.onClick}>
       <h2>Your Bets</h2>
@@ -288,7 +302,7 @@ const UserBets = (props) => {
           onClick={setPrivateBetsHandler}
           className={privateBets ? styles.active : ""}
         >
-          Requests
+          Requests{betCount}
         </h3>
         <h3
           onClick={setViewPrivateBetsHandler}

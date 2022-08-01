@@ -100,11 +100,11 @@ const Navbar = () => {
   if (userCtx.user.privateBets) {
     betCount =
       userCtx.user.privateBets.filter(
-        (bet) => bet.privateBetUsers[0].confirmed === false && bet.privateBetUsers[0].sender === false
+        (bet) => bet.privateBetUsers[0].confirmed === false && bet.privateBetUsers.find(pb => pb.userId === userCtx.user.id).sender === false
       ).length > 0
         ? `(${
             userCtx.user.privateBets.filter(
-              (bet) => bet.privateBetUsers[0].confirmed === false && bet.privateBetUsers[0].sender === false
+              (bet) => bet.privateBetUsers[0].confirmed === false && bet.privateBetUsers.find(pb => pb.userId === userCtx.user.id).sender === false
             ).length
           })`
         : "";
