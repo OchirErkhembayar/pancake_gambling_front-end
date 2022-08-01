@@ -100,7 +100,7 @@ const Navbar = () => {
   if (userCtx.user.privateBets) {
     betCount =
       userCtx.user.privateBets.filter(
-        (bet) => bet.privateBetUsers[0].confirmed === false
+        (bet) => bet.privateBetUsers[0].confirmed === false && bet.privateBetUsers[0].sender === false
       ).length > 0
         ? `(${
             userCtx.user.privateBets.filter(
