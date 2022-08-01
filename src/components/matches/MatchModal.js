@@ -12,7 +12,6 @@ const MatchModal = (props) => {
   const userCtx = useContext(UserContext);
   const enteredAthlete = useRef();
   const enteredFriend = useRef();
-  const friendRef = useRef();
   const theirAmount = useRef();
   const { error, isLoading, sendRequest: createBet } = useHttp();
   const [privateBet, setPrivateBet] = useState(false);
@@ -86,7 +85,7 @@ const MatchModal = (props) => {
           myAmount: enteredAmount,
           theirAmount: theirAmount.current.value,
           matchAthleteId: enteredAthlete.current.value,
-          friendId: friendRef.current.value
+          friendId: enteredFriend.current.value
         },
         method: "POST",
         headers: {
@@ -200,7 +199,7 @@ const MatchModal = (props) => {
                 .filter((f) => f.accepted)
                 .map((f) => {
                   return (
-                    <option key={f.userId} ref={friendRef} value={f.userId}>
+                    <option key={f.userId} value={f.userId}>
                       {f.user.username}
                     </option>
                   );
