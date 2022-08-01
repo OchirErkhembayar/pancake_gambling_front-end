@@ -66,13 +66,11 @@ const MatchModal = (props) => {
   };
 
   const onSubmitPrivateBetHandler = (e) => {
-    console.log(enteredAthlete.current.value, enteredFriend.current.value)
     e.preventDefault();
     if (!enteredAmountIsValid) {
       return;
     }
     const transformUser = (betObj) => {
-      console.log(betObj)
       props.onClick();
       userCtx.onRemovePancakes(enteredAmount);
       // userCtx.onAddPrivateBet(betObj.privateBet);

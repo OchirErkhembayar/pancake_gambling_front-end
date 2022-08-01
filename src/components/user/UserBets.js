@@ -99,7 +99,8 @@ const UserBets = (props) => {
       bets = props.privateBets.filter((bet) => {
         return (
           bet.privateBetUsers[0].result === null &&
-          bet.privateBetUsers[0].confirmed === false
+          bet.privateBetUsers[0].confirmed === false &&
+          bet.privateBetUsers[0].sender === false
         );
       });
     }
