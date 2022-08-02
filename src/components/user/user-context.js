@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import useHttp from '../../hooks/use-http';
 
@@ -22,6 +22,7 @@ const UserContext = React.createContext({
   deleteFriend: () => {},
   deleteFriendLoading: false,
   isLoading: false,
+  fetchUserDetails: () => {}
 });
 
 export const UserContextProvider = (props) => {
@@ -58,14 +59,15 @@ export const UserContextProvider = (props) => {
 
   const { isLoading: deletingLoading, sendRequest: fetchDeleteFriend } = useHttp();
 
-  useEffect(() => {
+  const fetchUserDetails = useCallback(() => {
     const transformUser = (userObj) => {
       setUser(userObj.user);
     };
-    if (userLoggedIn && !user.username) {
+    if (userLoggedIn) {
       if (new Date().getTime() > localStorage.getItem('expiry' || localStorage.getItem('token') === null || localStorage.getItem('userId') === null || localStorage.getItem('expiry') === null)) {
         return logoutHandler();
       }
+      console.log('Hello')
       fetchUser(
         {
           url: `${process.env.REACT_APP_URL}/auth/get-user/${user.id}`,
@@ -77,7 +79,11 @@ export const UserContextProvider = (props) => {
         transformUser
       );
     }
-  }, [fetchUser, userLoggedIn, user, token])
+  }, [fetchUser, userLoggedIn, token, user.id])
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, [fetchUserDetails])
 
   const addBetHandler = (bet) => {
     setUser(prevState => {
@@ -256,7 +262,8 @@ export const UserContextProvider = (props) => {
         declineFriend: declineFriend,
         declineFriendLoading: decliningLoading,
         deleteFriend: deleteFriendHandler,
-        deleteFriendLoading: deletingLoading
+        deleteFriendLoading: deletingLoading,
+        fetchUserDetails: fetchUserDetails
       }}
     >
       {props.children}

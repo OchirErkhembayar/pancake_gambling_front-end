@@ -31,6 +31,7 @@ const Navbar = () => {
   };
 
   const showModalHandler = () => {
+    userCtx.fetchUserDetails();
     closeNav();
     setShowModal(true);
   };
