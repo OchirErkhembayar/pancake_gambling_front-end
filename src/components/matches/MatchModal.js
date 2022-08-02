@@ -40,6 +40,7 @@ const MatchModal = (props) => {
   const onSubmitBetHandler = (e) => {
     e.preventDefault();
     if (!enteredAmountIsValid) {
+      alert("Invalid bet amount");
       return;
     }
     const transformUser = (betObj) => {
@@ -68,6 +69,7 @@ const MatchModal = (props) => {
   const onSubmitPrivateBetHandler = (e) => {
     e.preventDefault();
     if (!enteredAmountIsValid) {
+      alert("Invalid bet amount");
       return;
     }
     const transformUser = (betObj) => {

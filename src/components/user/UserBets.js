@@ -28,7 +28,26 @@ const UserBets = (props) => {
   const onAcceptBet = (e, privateBetUser) => {
     e.preventDefault();
     if (userCtx.user.balance < privateBetUser.amount) {
-      return;
+      alert("Not enough pancakes to accept this bet! Bet has been removed.");
+      const transformUser = (betObj) => {
+        props.onClick();
+        userCtx.onRemovePrivateBet(privateBetUser.privateBetId);
+      };
+
+      declineBet(
+        {
+          url: `${process.env.REACT_APP_URL}/bet/decline-private-bet`,
+          body: {
+            privateBetId: privateBetUser.privateBetId,
+          },
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + userCtx.token,
+          },
+        },
+        transformUser
+      );
     }
     const transformUser = (betObj) => {
       props.onClick();
