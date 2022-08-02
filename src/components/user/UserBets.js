@@ -48,6 +48,7 @@ const UserBets = (props) => {
         },
         transformUser
       );
+      return;
     }
     const transformUser = (betObj) => {
       props.onClick();
