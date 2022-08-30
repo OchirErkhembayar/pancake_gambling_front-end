@@ -77,7 +77,10 @@ const Navbar = () => {
     friendsButton = (
       <li className={styles.items}>
         <NavLink
-          onClick={closeNav}
+          onClick={() => {
+            closeNav();
+            return userCtx.fetchUserDetails();
+          }}
           activeClassName={styles.active}
           to="/friends"
         >
